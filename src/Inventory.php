@@ -40,9 +40,22 @@ class Inventory
      */
     public static function load($steamId, $appId = 730, $contextId = 2)
     {
+        if (Cache::has($steamId)) {
+            return Cache::get($steamId);
+        }
+
         $obj = new static;
 
-        return $obj->getApiJson($steamId, $appId, $contextId);
+        $inventory = $obj->getApiJson($steamId, $appId, $contextId);
+
+        if ($inventory !== null) {
+            $minutes = Config::get('braseidon.steaminventory.cache_time');
+            Cache::put($steamId, $inventory, $minutes);
+
+            return $inventory;
+        }
+
+        return $inventory;
     }
 
     /**
@@ -127,7 +140,8 @@ class Inventory
         }
 
         $steamId = explode(':', $steamId);
-        $steamId64 = bcadd((bcadd('76561197960265728', $steamId[1])), (bcmul($steamId[2], '2')));
+        $steamId = bcadd((bcadd('76561197960265728', $steamId[1])), (bcmul($steamId[2], '2')));
+        $steamId = str_replace('.0000000000', '', $steamId);
 
         return $steamId64;
     }
