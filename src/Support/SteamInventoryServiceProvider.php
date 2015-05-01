@@ -19,7 +19,7 @@ class SteamInventoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('braseidon/steam-inventory-laravel');
+        //
     }
 
     /**
