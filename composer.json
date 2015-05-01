@@ -1,0 +1,15 @@
+{
+    "name": "braseidon/steam-inventory-laravel",
+    "description": "SteamInventory is a wrapper around the JSON Steam API that grabs a user's items - all packaged up for Laravel.",
+    "type": "library",
+    "keywords": ["steam", "api", "inventory", "wrapper", "json", "steamid", "php", "laravel"],
+    "homepage": "https://github.com/braseidon/steam-inventory-laravel",
+    "authors": [
+        {
+            "name": "Brandon Johnson",
+            "email": "bluejd910@gmail.com"
+        }
+    ],
+    "license": "Apache-2.0",
+    "require": {}
+}
