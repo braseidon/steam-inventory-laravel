@@ -1,4 +1,4 @@
-<?php namespace Braseidon\SteamInventory\Support;
+<?php namespace Braseidon\SteamInventory\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

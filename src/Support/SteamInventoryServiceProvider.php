@@ -1,5 +1,6 @@
 <?php namespace Braseidon\SteamInventory\Support;
 
+use Braseidon\SteamInventory\Inventory;
 use Illuminate\Support\ServiceProvider;
 
 class SteamInventoryServiceProvider extends ServiceProvider
@@ -29,8 +30,12 @@ class SteamInventoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $configPath = __DIR__ . '/../../config/braseidon.steaminventory.php';
+        $this->mergeConfigFrom($configPath, 'braseidon.steaminventory');
+        $this->publishes([$configPath => config_path('braseidon.steaminventory.php')], 'config');
+
         // UserRepository
-        $this->app->bindShared('Braseidon\SteamInventory\Inventory', function ($app) {
+        $this->app->bindShared('braseidon.steaminventory', function ($app) {
             return new Inventory();
         });
 
