@@ -1,8 +1,10 @@
 # Braseidon\SteamInventory (For Laravel 5)
 
 [![Author](http://img.shields.io/badge/author-@BraSeidon-blue.svg?style=flat-square)](https://twitter.com/BraSeidon)
+[![Source Code](http://img.shields.io/badge/source-braseidon/steam-inventory-laravel-blue.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel)
 [![Latest Version](https://img.shields.io/github/release/braseidon/steam-inventory-laravel.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/braseidon/steam-inventory-laravel/master.svg?style=flat-square)](https://travis-ci.org/braseidon/steam-inventory-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/braseidon/steam-inventory-laravel.svg?style=flat-square)](https://packagist.org/packages/braseidon/steam-inventory-laravel)
 
 SteamInventory is a wrapper around the JSON Steam API that grabs a user's items - all packaged up for Laravel.
@@ -21,7 +23,7 @@ Braseidon\SteamInventory is available via Composer:
 $ composer require braseidon/steam-inventory-laravel
 ```
 
-After pulling in the package via Composer, you need to include the Service Provider in your app's <code>config/app.php</code>.
+Include the Service Provider in your app's <code>config/app.php</code>.
 
 ```php
 'providers' => [
@@ -32,7 +34,7 @@ After pulling in the package via Composer, you need to include the Service Provi
 
 ## Documentation
 
-<strong>Documentation will be finished when v1.0.0 is up.</strong>
+Documentation will be finished when v1.0.0 is up.
 
 ## Contributing
 
