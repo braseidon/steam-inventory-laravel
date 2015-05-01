@@ -1,7 +1,7 @@
 # Braseidon\SteamInventory (For Laravel 5)
 
 [![Author](http://img.shields.io/badge/author-@BraSeidon-blue.svg?style=flat-square)](https://twitter.com/BraSeidon)
-[![Source Code](http://img.shields.io/badge/source-thephpleague/glide-blue.svg?style=flat-square)](https://github.com/thephpleague/glide)
+[![Source Code](http://img.shields.io/badge/source-braseidon/steam-inventory-laravel-blue.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel)
 [![Latest Version](https://img.shields.io/github/release/braseidon/steam--inventory--laravel.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel/blob/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/braseidon/steam-inventory-laravel/master.svg?style=flat-square)](https://travis-ci.org/braseidon/steam-inventory-laravel)
