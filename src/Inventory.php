@@ -2,6 +2,7 @@
 
 use Cache;
 use Config;
+use Illuminate\Cache\CacheManager;
 use InvalidArgumentException;
 
 class Inventory
@@ -26,10 +27,10 @@ class Inventory
      *
      * @param string $cache
      */
-    public function __construct($cache = '')
+    public function __construct(CacheManager $cache)
     {
         $this->cache = $cache;
-
+        // dd($this->cache);
     }
 
     /**
@@ -38,19 +39,17 @@ class Inventory
      * @param  integer $steamId
      * @return Json
      */
-    public static function load($steamId, $appId = 730, $contextId = 2)
+    public function load($steamId, $appId = 730, $contextId = 2)
     {
-        if (Cache::has($steamId)) {
-            return Cache::get($steamId);
+        if ($this->cache->has($steamId)) {
+            return $this->cache->get($steamId);
         }
 
-        $obj = new static;
-
-        $inventory = $obj->getApiJson($steamId, $appId, $contextId);
+        $inventory = $this->getApiJson($steamId, $appId, $contextId);
 
         if ($inventory !== null) {
             $minutes = Config::get('braseidon.steaminventory.cache_time');
-            Cache::put($steamId, $inventory, $minutes);
+            $this->cache->put($steamId, $inventory, $minutes);
 
             return $inventory;
         }
@@ -143,6 +142,6 @@ class Inventory
         $steamId = bcadd((bcadd('76561197960265728', $steamId[1])), (bcmul($steamId[2], '2')));
         $steamId = str_replace('.0000000000', '', $steamId);
 
-        return $steamId64;
+        return $steamId;
     }
 }

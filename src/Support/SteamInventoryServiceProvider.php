@@ -1,6 +1,7 @@
 <?php namespace Braseidon\SteamInventory\Support;
 
 use Braseidon\SteamInventory\Inventory;
+// use Illuminate\Cache\CacheManager;
 use Illuminate\Support\ServiceProvider;
 
 class SteamInventoryServiceProvider extends ServiceProvider
@@ -36,7 +37,7 @@ class SteamInventoryServiceProvider extends ServiceProvider
 
         // UserRepository
         $this->app->bindShared('braseidon.steaminventory', function ($app) {
-            return new Inventory();
+            return new Inventory($app->make('Illuminate\Cache\CacheManager'));
         });
 
         $this->app->alias('braseidon.steaminventory', 'Braseidon\SteamInventory\Inventory');

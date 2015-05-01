@@ -12,6 +12,6 @@ return [
     | smoother experience for your visitors.
     |
     */
-    'cache_time'    => 30,
+    'cache_time'    => 60,
 
 ];
