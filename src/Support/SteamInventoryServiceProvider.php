@@ -35,7 +35,6 @@ class SteamInventoryServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($configPath, 'braseidon.steaminventory');
         $this->publishes([$configPath => config_path('braseidon.steaminventory.php')], 'config');
 
-        // UserRepository
         $this->app->bindShared('braseidon.steaminventory', function ($app) {
             return new Inventory($app->make('Illuminate\Cache\CacheManager'));
         });

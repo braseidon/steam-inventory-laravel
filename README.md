@@ -1,4 +1,4 @@
-# Braseidon\SteamInventory (For Laravel 5)
+# Braseidon Steam Inventory
 
 [![Author](http://img.shields.io/badge/author-@BraSeidon-blue.svg?style=flat-square)](https://twitter.com/BraSeidon)
 [![Source Code](http://img.shields.io/badge/source-braseidon/steam--inventory--laravel-blue.svg?style=flat-square)](https://github.com/braseidon/steam-inventory-laravel)
@@ -7,7 +7,7 @@
 [![Build Status](https://img.shields.io/travis/braseidon/steam-inventory-laravel/master.svg?style=flat-square)](https://travis-ci.org/braseidon/steam-inventory-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/braseidon/steam-inventory-laravel.svg?style=flat-square)](https://packagist.org/packages/braseidon/steam-inventory-laravel)
 
-SteamInventory is a wrapper around the JSON Steam API that grabs a user's items - all packaged up for Laravel.
+Braseidon\SteamInventory is a wrapper around the JSON Steam API that grabs a user's items - all packaged up for Laravel 5.
 
 ## Highlights
 
@@ -48,7 +48,6 @@ If you discover any security related issues, please email brandon@poseidonwebstu
 
 - [Brandon Johnson](https://github.com/braseidon)
 - [All Contributors](https://github.com/braseidon/steam-inventory-laravel/graphs/contributors)
-
 
 ## License
 

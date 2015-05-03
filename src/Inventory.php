@@ -1,6 +1,5 @@
 <?php namespace Braseidon\SteamInventory;
 
-use Cache;
 use Config;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Collection;
