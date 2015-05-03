@@ -163,7 +163,7 @@ class Inventory
 
         foreach ($data as $dataItem) {
             // Ignore untradable items
-            if (object_get($dataItem, 'tradable') !== 1) {
+            if (object_get($dataItem, 'tradable') !== 1 || object_get($dataItem, 'instanceid') == 0) {
                 continue;
             }
 
