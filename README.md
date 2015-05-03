@@ -7,7 +7,7 @@
 [![Build Status](https://img.shields.io/travis/braseidon/steam-inventory-laravel/master.svg?style=flat-square)](https://travis-ci.org/braseidon/steam-inventory-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/braseidon/steam-inventory-laravel.svg?style=flat-square)](https://packagist.org/packages/braseidon/steam-inventory-laravel)
 
-Braseidon\SteamInventory is a wrapper around the JSON Steam API that grabs a user's inventory of items.
+[Braseidon\SteamInventory](https://github.com/braseidon/steam-inventory-laravel) is a wrapper around the JSON Steam API that grabs a user's inventory of items.
 
 ## Highlights
 
@@ -15,10 +15,11 @@ Braseidon\SteamInventory is a wrapper around the JSON Steam API that grabs a use
 - Automagically converts 32 bit and 64 bit Steam ID's to the appropriate type
 - Utilizes Laravel's Caching system
 - Made specifically for use with [Laravel 5](https://github.com/laravel/laravel)
+- Coded to the [PSR-2](http://www.php-fig.org/psr/psr-2/) and [PSR-4](http://www.php-fig.org/psr/psr-4/) PHP coding standards
 
 # Installation
 
-Braseidon\SteamInventory is available via Composer:
+[Braseidon\SteamInventory](https://github.com/braseidon/steam-inventory-laravel) is available via Composer:
 
 ```bash
 $ composer require braseidon/steam-inventory-laravel

@@ -173,18 +173,18 @@ class Inventory
 
             $array = [
                     'appid'           => object_get($dataItem, 'appid'),            // 730
-                    'instanceid'      => object_get($dataItem, 'instanceid'),       //
+                    'classid'         => object_get($dataItem, 'classid'),          // 310777928
+                    'instanceid'      => object_get($dataItem, 'instanceid'),       // 480085569 or 0
                     'name'            => object_get($dataItem, 'name'),             // P250 | Sand Dune
                     'market_name'     => object_get($dataItem, 'market_name'),      // P250 | Sand Dune (Field-Tested)
-                    'classid'         => object_get($dataItem, 'classid'),          // 310777928
-                    'icon_url'        => object_get($dataItem, 'icon_url'),
-                    'icon_url_large'  => object_get($dataItem, 'icon_url_large'),
-                    'weapon'          => array_get($tags, 'Weapon'),               // P250
-                    'type'            => array_get($tags, 'Type'),                 // Pistol
-                    'exterior'        => array_get($tags, 'Exterior'),             // Field-Tested
+                    'icon_url'        => object_get($dataItem, 'icon_url'),         // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
+                    'icon_url_large'  => object_get($dataItem, 'icon_url_large'),   // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
+                    'weapon'          => array_get($tags, 'Weapon'),                // P250
+                    'type'            => array_get($tags, 'Type'),                  // Pistol
+                    'exterior'        => array_get($tags, 'Exterior'),              // Field-Tested
                     'stattrack'       => (stripos($cat, 'StatTrak') !== false) ? true : false,
-                    'quality'         => array_get($tags, 'Quality'),              // Consumer Grade
-                    'collection'      => array_get($tags, 'Collection'),           // The Dust 2 Collection
+                    'quality'         => array_get($tags, 'Quality'),               // Consumer Grade
+                    'collection'      => array_get($tags, 'Collection'),            // The Dust 2 Collection
                     'description'     => $desc,
                 ];
 
