@@ -56,7 +56,7 @@ class Inventory
 
         $inventory = $this->getSteamInventory($steamId, $appId, $contextId);
 
-        if (is_object($inventory)) {
+        if (is_array($inventory)) {
             $minutes = Config::get('braseidon.steaminventory.cache_time');
             $this->cache->tags($this->cacheTag)->put($steamId, $inventory, $minutes);
 
@@ -83,7 +83,7 @@ class Inventory
         $this->checkInfo($steamId, $appId, $contextId);
 
         $url  = $this->steamApiUrl($steamId, $appId, $contextId);
-        $json = json_decode(file_get_contents($url));
+        $json = json_decode(file_get_contents($url), true);
 
         return $json;
     }
@@ -120,7 +120,7 @@ class Inventory
             return false;
         }
 
-        $data = object_get($this->currentData, 'rgInventory', false);
+        $data = array_get($this->currentData, 'rgInventory');
 
         return $this->collection->make($data);
     }
@@ -136,7 +136,7 @@ class Inventory
             return false;
         }
 
-        $data = object_get($this->currentData, 'rgDescriptions', false);
+        $data = array_get($this->currentData, 'rgDescriptions', false);
         $data = $this->collection->make($data);
         // dd($data);
 
@@ -163,29 +163,31 @@ class Inventory
 
         foreach ($data as $dataItem) {
             // Ignore untradable items
-            if (object_get($dataItem, 'tradable') !== 1 || object_get($dataItem, 'instanceid') == 0) {
+            if (array_get($dataItem, 'tradable') !== 1 || array_get($dataItem, 'instanceid') == 0) {
                 continue;
             }
 
-            $desc = $this->parseItemDescription($dataItem->descriptions);
-            $tags = $this->parseItemTags($dataItem->tags);
+            $name = trim(last(explode('|', array_get($dataItem, 'name'))));
+            $desc = $this->parseItemDescription(array_get($dataItem, 'descriptions'));
+            $tags = $this->parseItemTags(array_get($dataItem, 'tags'));
             $cat  = array_get($tags, 'Category', '');
 
             $array = [
-                    'appid'           => object_get($dataItem, 'appid'),            // 730
-                    'classid'         => object_get($dataItem, 'classid'),          // 310777928
-                    'instanceid'      => object_get($dataItem, 'instanceid'),       // 480085569 or 0
-                    'name'            => object_get($dataItem, 'name'),             // P250 | Sand Dune
-                    'market_name'     => object_get($dataItem, 'market_name'),      // P250 | Sand Dune (Field-Tested)
-                    'icon_url'        => object_get($dataItem, 'icon_url'),         // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
-                    'icon_url_large'  => object_get($dataItem, 'icon_url_large'),   // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
+                    'appid'           => array_get($dataItem, 'appid'),            // 730
+                    'classid'         => array_get($dataItem, 'classid'),          // 310777928
+                    'instanceid'      => array_get($dataItem, 'instanceid'),       // 480085569 or 0
+                    'name'            => $name,                                     // Sand Dune
+                    'market_name'     => array_get($dataItem, 'market_name'),      // P250 | Sand Dune (Field-Tested)
                     'weapon'          => array_get($tags, 'Weapon'),                // P250
                     'type'            => array_get($tags, 'Type'),                  // Pistol
-                    'exterior'        => array_get($tags, 'Exterior'),              // Field-Tested
-                    'stattrack'       => (stripos($cat, 'StatTrak') !== false) ? true : false,
                     'quality'         => array_get($tags, 'Quality'),               // Consumer Grade
+                    'exterior'        => array_get($tags, 'Exterior'),              // Field-Tested
                     'collection'      => array_get($tags, 'Collection'),            // The Dust 2 Collection
+                    'stattrack'       => (stripos($cat, 'StatTrak') !== false) ? true : false,
+                    'icon_url'        => array_get($dataItem, 'icon_url'),         // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
+                    'icon_url_large'  => array_get($dataItem, 'icon_url_large'),   // fWFc82js0fmoRAP-qOIPu5THSWqfSmTEL ...
                     'description'     => $desc,
+                    'name_color'      => '#' . array_get($dataItem, 'name_color'),
                 ];
 
             $items->push(json_decode(json_encode($array)));
@@ -224,7 +226,10 @@ class Inventory
         $parsed = [];
 
         foreach ($tags as $tag) {
-            $parsed[$tag->category_name] = $tag->name;
+            $categoryName = array_get($tag, 'category_name');
+            $tagName = array_get($tag, 'name');
+
+            $parsed[$categoryName] = $tagName;
         }
 
         return $parsed;
