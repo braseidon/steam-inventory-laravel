@@ -31,15 +31,15 @@ class SteamInventoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $configPath = __DIR__ . '/../../config/braseidon.steaminventory.php';
-        $this->mergeConfigFrom($configPath, 'braseidon.steaminventory');
-        $this->publishes([$configPath => config_path('braseidon.steaminventory.php')], 'config');
+        $configPath = __DIR__ . '/../../config/braseidon.steam-inventory.php';
+        $this->mergeConfigFrom($configPath, 'braseidon.steam-inventory');
+        $this->publishes([$configPath => config_path('braseidon.steam-inventory.php')], 'config');
 
-        $this->app->bindShared('braseidon.steaminventory', function ($app) {
+        $this->app->bindShared('braseidon.steam-inventory', function ($app) {
             return new Inventory($app->make('Illuminate\Cache\CacheManager'));
         });
 
-        $this->app->alias('braseidon.steaminventory', 'Braseidon\SteamInventory\Inventory');
+        $this->app->alias('braseidon.steam-inventory', 'Braseidon\SteamInventory\Inventory');
     }
 
     /**
@@ -49,6 +49,6 @@ class SteamInventoryServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['braseidon.steaminventory'];
+        return ['braseidon.steam-inventory'];
     }
 }

@@ -57,7 +57,7 @@ class Inventory
         $inventory = $this->getSteamInventory($steamId, $appId, $contextId);
 
         if (is_array($inventory)) {
-            $minutes = Config::get('braseidon.steaminventory.cache_time');
+            $minutes = Config::get('braseidon.steam-inventory.cache_time');
             $this->cache->tags($this->cacheTag)->put($steamId, $inventory, $minutes);
 
             $this->currentData = $inventory;

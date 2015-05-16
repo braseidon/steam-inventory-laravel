@@ -12,6 +12,6 @@ return [
     | smoother experience for your visitors.
     |
     */
-    'cache_time'    => 60,
+    'cache_time' => env('STEAM_ITEM_CACHE', 30),
 
 ];
