@@ -3,9 +3,10 @@
 use Config;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Collection;
+
 use InvalidArgumentException;
 
-class Inventory
+class SteamInventory
 {
 
     /**
@@ -48,7 +49,7 @@ class Inventory
      * @param  integer $steamId
      * @return Json
      */
-    public function load($steamId, $appId = 730, $contextId = 2)
+    public function loadInventory($steamId, $appId = 730, $contextId = 2)
     {
         if ($this->cache->tags($this->cacheTag)->has($steamId)) {
             $this->currentData = $this->cache->tags($this->cacheTag)->get($steamId);
@@ -76,7 +77,7 @@ class Inventory
      * @param  integer $contextId
      * @return Json
      */
-    public function getSteamInventory($steamId, $appId, $contextId)
+    private function getSteamInventory($steamId, $appId, $contextId)
     {
         $steamId = $this->cleanSteamId($steamId);
 
@@ -96,7 +97,7 @@ class Inventory
      * @param  integer $contextId
      * @return string
      */
-    protected function steamApiUrl($steamId, $appId, $contextId)
+    private function steamApiUrl($steamId, $appId, $contextId)
     {
         return 'http://steamcommunity.com/profiles/' . $steamId . '/inventory/json/' . $appId . '/' . $contextId . '/';
     }
