@@ -53,6 +53,8 @@ class SteamInventory
     {
         if ($this->cache->tags($this->cacheTag)->has($steamId)) {
             $this->currentData = $this->cache->tags($this->cacheTag)->get($steamId);
+            // Return the cached data
+            return $this;
         }
 
         $inventory = $this->getSteamInventory($steamId, $appId, $contextId);
@@ -80,11 +82,10 @@ class SteamInventory
     private function getSteamInventory($steamId, $appId, $contextId)
     {
         $steamId = $this->cleanSteamId($steamId);
-
         $this->checkInfo($steamId, $appId, $contextId);
 
         $url  = $this->steamApiUrl($steamId, $appId, $contextId);
-        $json = json_decode(file_get_contents($url), true);
+        $json = json_decode(@file_get_contents($url), true);
 
         return $json;
     }
