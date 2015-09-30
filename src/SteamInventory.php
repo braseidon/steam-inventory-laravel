@@ -1,7 +1,8 @@
-<?php namespace Braseidon\SteamInventory;
+<?php 
+namespace Braseidon\SteamInventory;
 
 use Config;
-use Illuminate\Cache\CacheManager;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Collection;
 
 use InvalidArgumentException;
@@ -32,14 +33,13 @@ class SteamInventory
     /**
      * @var mixed The last inventory that was pulled
      */
-    protected $currentData;
+    var $currentData;
 
     /**
-     * @param string $cache Instantiate the Object
+     * Create internal collection
      */
-    public function __construct(CacheManager $cache)
+    public function __construct()
     {
-        $this->cache = $cache;
         $this->collection = new Collection();
     }
 
@@ -51,17 +51,16 @@ class SteamInventory
      */
     public function loadInventory($steamId, $appId = 730, $contextId = 2)
     {
-        if ($this->cache->tags($this->cacheTag)->has($steamId)) {
-            $this->currentData = $this->cache->tags($this->cacheTag)->get($steamId);
-            // Return the cached data
+        if ( Cache::tags([$this->cacheTag])->has($steamId) ) {
+            $this->currentData = Cache::tags([$this->cacheTag])->get($steamId);
             return $this;
         }
 
         $inventory = $this->getSteamInventory($steamId, $appId, $contextId);
 
         if (is_array($inventory)) {
-            $minutes = Config::get('braseidon.steam-inventory.cache_time');
-            $this->cache->tags($this->cacheTag)->put($steamId, $inventory, $minutes);
+            $minutes = $this->cacheTime;
+            Cache::tags([$this->cacheTag])->put($steamId, $inventory, $minutes);
 
             $this->currentData = $inventory;
         } else {
@@ -140,7 +139,6 @@ class SteamInventory
 
         $data = array_get($this->currentData, 'rgDescriptions', false);
         $data = $this->collection->make($data);
-        // dd($data);
 
         $items = $this->parseItemDescriptions($data);
 
@@ -165,7 +163,7 @@ class SteamInventory
 
         foreach ($data as $dataItem) {
             // Ignore untradable items
-            if (array_get($dataItem, 'tradable') !== 1 || array_get($dataItem, 'instanceid') == 0) {
+            if (array_get($dataItem, 'tradable') !== 1) {
                 continue;
             }
 
