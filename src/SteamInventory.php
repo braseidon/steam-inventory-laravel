@@ -13,7 +13,7 @@ class SteamInventory
     /**
      * @var integer $cacheTime Number of minutes to cache a Steam ID's inventory
      */
-    protected $cacheTime = 30;
+    var $cacheTime = 30;
 
     /**
      * @var string $cacheTag The Cache tag that will be used for all items
@@ -28,9 +28,16 @@ class SteamInventory
      */
     public function loadInventory($steamId, $appId = 730, $contextId = 2)
     {
-        $rawInventory = Cache::tags([$this->cacheTag])->remember($steamId, $this->cacheTime, function() use ($steamId, $appId, $contextId) {
+        $rawInventory = Cache::tags([$this->cacheTag, $appId])->remember($steamId, $this->cacheTime, function() use ($steamId, $appId, $contextId) {
 			return $this->fetchRawSteamInventory($steamId, $appId, $contextId);
 		});
+
+        $this->success = $rawInventory['success'];
+		if ($this->success == false) {
+			$this->error = $rawInventory['Error'] ? $rawInventory['Error'] : '';
+			return false;
+		}
+
         $this->inventory = collect($rawInventory['rgInventory'])
         	// Map the descriptions into the item.
             ->map(function($item) use ($contextId, $rawInventory) {
